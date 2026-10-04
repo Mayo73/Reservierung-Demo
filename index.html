@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ihr Bistro Tischreservierung</title>
+  <meta name="description" content="Klickbare Demo: Tischreservierung im Grundriss eines Bistros.">
+  <meta name="theme-color" content="#FAF8F4">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Libre+Caslon+Text:wght@400;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="stage">
+    <aside class="stage-note" aria-label="Über diese Demo">
+      <p class="note-kicker">Klickbare Demo</p>
+      <h1 class="note-title">Tischreservierung im Grundriss</h1>
+      <p class="note-text">So kann die Reservierung für ein kleines Bistro aussehen: Gäste sehen den Raum, wählen ihren Lieblingsplatz und buchen in zwei Schritten.</p>
+      <ul class="note-list">
+        <li>Die Belegung wechselt mit Tag und Uhrzeit.</li>
+        <li>Wählbar sind nur Tische, die zur Personenzahl passen.</li>
+        <li>Montag ist Ruhetag.</li>
+        <li>Reservierungen bleiben in diesem Browser gespeichert.</li>
+      </ul>
+      <button class="note-reset" type="button" data-action="reset">Demo zurücksetzen</button>
+    </aside>
+
+    <div class="device-slot" id="device-slot">
+      <div class="device">
+        <span class="device-btn l1"></span>
+        <span class="device-btn l2"></span>
+        <span class="device-btn l3"></span>
+        <span class="device-btn r1"></span>
+
+        <div class="screen" id="screen">
+          <div class="island" aria-hidden="true"></div>
+          <div class="statusbar" aria-hidden="true">
+            <span class="sb-time">9:41</span>
+            <span class="sb-icons">
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3.2" height="4" rx="1"/><rect x="4.9" y="5.5" width="3.2" height="6.5" rx="1"/><rect x="9.8" y="3" width="3.2" height="9" rx="1"/><rect x="14.7" y="0" width="3.2" height="12" rx="1"/></svg>
+              <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M1.4 4.3a10.4 10.4 0 0 1 14.2 0"/><path d="M4.1 7.1a6.5 6.5 0 0 1 8.8 0"/><path d="M6.8 9.9a2.6 2.6 0 0 1 3.4 0"/></svg>
+              <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".6" y=".6" width="23" height="11.8" rx="3.6" fill="none" stroke="currentColor" stroke-opacity=".38"/><rect x="2.2" y="2.2" width="19.8" height="8.6" rx="2.2" fill="currentColor"/><path d="M25.2 4.4v4.2c.9-.3 1.5-1.2 1.5-2.1s-.6-1.8-1.5-2.1z" fill="currentColor" fill-opacity=".45"/></svg>
+            </span>
+          </div>
+
+          <div class="app" id="app">
+            <header class="topbar">
+              <div class="topbar-side">
+                <button class="icon-btn" id="btn-back" type="button" aria-label="Zurück zur Restaurantseite"><span data-icon="back"></span></button>
+              </div>
+              <div class="brand">
+                <svg class="brand-leaf" viewBox="0 0 40 26" aria-hidden="true">
+                  <path d="M7 23.5C13 17.5 21 10.8 33.5 4" fill="none" stroke="#2F4F40" stroke-width="1.2" stroke-linecap="round"/>
+                  <g fill="#6F9378" stroke="#2F4F40" stroke-width=".8">
+                    <path transform="translate(11.6 19.4) rotate(-118)" d="M0 0C2.7-2.9 6.7-2.7 9 0 6.7 2.7 2.7 2.9 0 0Z"/>
+                    <path transform="translate(14.6 17) rotate(14)" d="M0 0C2.7-2.9 6.7-2.7 9 0 6.7 2.7 2.7 2.9 0 0Z"/>
+                    <path transform="translate(19.2 13.4) rotate(-108)" d="M0 0C2.7-2.9 6.7-2.7 9 0 6.7 2.7 2.7 2.9 0 0Z"/>
+                    <path transform="translate(22.6 11) rotate(20)" d="M0 0C2.7-2.9 6.7-2.7 9 0 6.7 2.7 2.7 2.9 0 0Z"/>
+                    <path transform="translate(27 8) rotate(-98)" d="M0 0C2.5-2.6 6.2-2.5 8.4 0 6.2 2.5 2.5 2.6 0 0Z"/>
+                    <path transform="translate(32.6 4.5) rotate(-28)" d="M0 0C2.3-2.4 5.6-2.3 7.6 0 5.6 2.3 2.3 2.4 0 0Z"/>
+                  </g>
+                </svg>
+                <div class="brand-name">Ihr Bistro</div>
+                <div class="brand-sub">Restaurant</div>
+              </div>
+              <div class="topbar-side topbar-actions">
+                <button class="icon-btn" id="btn-fav" type="button" aria-pressed="false" aria-label="Als Favorit merken"><span data-icon="heart"></span></button>
+                <button class="icon-btn" id="btn-menu" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="menu" aria-label="Weitere Optionen"><span data-icon="dots"></span></button>
+              </div>
+            </header>
+
+            <div class="menu" id="menu" role="menu" hidden>
+              <button type="button" role="menuitem" data-action="reservations"><span data-icon="list"></span>Meine Reservierungen<span class="menu-count" id="menu-count"></span></button>
+              <button type="button" role="menuitem" data-action="hours"><span data-icon="clock"></span>Öffnungszeiten</button>
+              <button type="button" role="menuitem" data-action="reset"><span data-icon="reset"></span>Demo zurücksetzen</button>
+            </div>
+
+            <main class="view view-plan" id="view-plan">
+              <div class="filters">
+                <button class="filter" id="f-date" type="button" aria-label="Datum ändern">
+                  <span data-icon="calendar" class="filter-icon"></span>
+                  <span class="filter-text"><span class="filter-label">Datum</span><span class="filter-value" id="v-date">&nbsp;</span></span>
+                  <span data-icon="chevDown" class="chev"></span>
+                </button>
+                <button class="filter" id="f-guests" type="button" aria-label="Anzahl Gäste ändern">
+                  <span data-icon="users" class="filter-icon"></span>
+                  <span class="filter-text"><span class="filter-label">Gäste</span><span class="filter-value" id="v-guests">&nbsp;</span></span>
+                  <span data-icon="chevDown" class="chev"></span>
+                </button>
+                <button class="filter" id="f-time" type="button" aria-label="Uhrzeit ändern">
+                  <span data-icon="clock" class="filter-icon"></span>
+                  <span class="filter-text"><span class="filter-label">Uhrzeit</span><span class="filter-value" id="v-time">&nbsp;</span></span>
+                  <span data-icon="chevDown" class="chev"></span>
+                </button>
+              </div>
+
+              <div class="plan-wrap">
+                <svg class="plan" id="plan" viewBox="96 346 764 680" role="group" aria-label="Grundriss mit Innenbereich und Terrasse"></svg>
+              </div>
+
+              <ul class="legend" aria-label="Legende">
+                <li><i class="lg-free"></i>Verfügbar</li>
+                <li><i class="lg-busy"></i>Belegt</li>
+                <li><i class="lg-sel"></i>Ausgewählt</li>
+              </ul>
+
+              <section class="sheet" aria-labelledby="pick-title">
+                <div class="grabber" aria-hidden="true"></div>
+                <div class="pick">
+                  <div class="pick-thumb" id="pick-thumb"></div>
+                  <div class="pick-info" aria-live="polite">
+                    <p class="eyebrow">Ausgewählter Platz</p>
+                    <h2 class="pick-title" id="pick-title">&nbsp;</h2>
+                    <p class="pick-line" id="pick-line"></p>
+                    <div class="pick-tags" id="pick-tags"></div>
+                  </div>
+                </div>
+                <span class="slots-label" id="slots-label">Uhrzeit</span>
+                <div class="slots">
+                  <div class="slots-track" id="slots" role="group" aria-labelledby="slots-label"></div>
+                  <button class="slots-more" id="slots-more" type="button" aria-label="Spätere Uhrzeiten"><span data-icon="chevRight"></span></button>
+                </div>
+              </section>
+              <div class="cta-bar on-sheet">
+                <button class="cta" id="cta-pick" type="button"><span>Platz auswählen</span><span data-icon="arrow"></span></button>
+              </div>
+            </main>
+
+            <section class="view view-details" id="view-details" aria-label="Ihre Angaben" hidden></section>
+            <section class="view view-done" id="view-done" aria-label="Bestätigung" hidden></section>
+          </div>
+
+          <div class="overlay" id="overlay" hidden>
+            <div class="overlay-backdrop" data-close></div>
+            <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+              <div class="grabber" aria-hidden="true"></div>
+              <div class="modal-head">
+                <h2 class="modal-title" id="modal-title"></h2>
+                <button class="icon-btn modal-close" type="button" data-close aria-label="Schließen"><span data-icon="close"></span></button>
+              </div>
+              <div class="modal-body" id="modal-body"></div>
+            </div>
+          </div>
+
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
